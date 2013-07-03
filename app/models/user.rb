@@ -8,10 +8,6 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
-  # def User.new_remember_token
-  #   SecureRandom.urlsafe_base64
-  # end
-
   def new_remember_token!
     create_remember_token
     save!(validate: false)
@@ -23,7 +19,7 @@ class User < ActiveRecord::Base
 
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token)
-    
+
     # cost = if ActiveModel::SecurePassword.min_cost
     #          BCrypt::Engine::MIN_COST
     #        else
