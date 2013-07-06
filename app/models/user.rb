@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  def feed
+    # This is preliminary...
+    Micropost.where("user_id = ?", id)
+  end
+
   def new_remember_token!
     create_remember_token
     save!(validate: false)
