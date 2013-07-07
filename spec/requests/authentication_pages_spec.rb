@@ -90,7 +90,7 @@ describe "AuthenticationPages" do
             specify { expect(response).to redirect_to(signin_path) }
           end
         end
-      end
+      end # when attempting to visit a protected page
       
       describe "in the Users controller" do
         describe "visiting the edit page" do
@@ -118,6 +118,18 @@ describe "AuthenticationPages" do
           it { should have_title('Sign in') }
         end
       end # in the Users controller
+
+      describe "in the Relationships controller" do
+        describe "submitting to the create action" do
+          before { post relationships_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy ation" do
+          before { delete relationship_path(1) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end # in the Relationships controller
     end # authorization
     
     describe "as wrong user" do
